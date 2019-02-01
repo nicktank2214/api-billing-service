@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: billing-service
+
+server:
+  port: 8302
+
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8301/eureka/
+  instance:
+    hostname: localhost
