@@ -77,7 +77,7 @@ public class Bill implements Serializable {
 	private String account;
 
 	@Column(name = "invoice")
-	private Integer invoice;
+	private String invoice;
 
 	@Column(name = "country")
 	private String country;
@@ -91,8 +91,40 @@ public class Bill implements Serializable {
 	@Column(name = "departmentid")
 	private String departmentId;
 	
+	@Column(name = "contractpriceid")
+	private Integer contractPriceId;
 	
+	@Column(name = "productdocid")
+	private Integer productDocId;
+	
+	@Column(name = "productlinedocid")
+	private Integer productLineDocId;
 
+	@Column(name = "userid")
+	private String userId;
+	
+	@Column(name = "credits")
+	private BigDecimal credits;
+
+	@Column(name = "producttype")
+	private String productType;
+	
+	@Column(name = "cost")
+	private BigDecimal cost;
+
+	@Column(name = "invoiceid")
+	private Integer invoiceId;
+
+	@Column(name = "cost2")
+	private BigDecimal cost2;
+	@Column(name = "cost3")
+	private BigDecimal cost3;
+	@Column(name = "cost4")
+	private BigDecimal cost4;
+	@Column(name = "cost5")
+	private BigDecimal cost5;
+	
+	
 
 	public Bill(
 			Integer client,
@@ -110,11 +142,23 @@ public class Bill implements Serializable {
 			String invoiced,
 			String billType,
 			String account,
-			Integer invoice,
+			String invoice,
 			String country,
 			String businessId,
 			String companyId,
-			String departmentId
+			String departmentId,
+			Integer contractPriceId,
+			Integer productDocId,
+			Integer productLineDocId,
+			String userId,
+			BigDecimal credits,
+			String productType,
+			BigDecimal cost,
+			Integer invoiceId,
+			BigDecimal cost2,
+			BigDecimal cost3,
+			BigDecimal cost4,
+			BigDecimal cost5
 			) {
 		this.client=client;
 		this.billDate=billDate;
@@ -135,7 +179,19 @@ public class Bill implements Serializable {
 		this.country=country;
 		this.businessId=businessId;
 		this.companyId=companyId;
-		this.departmentId=departmentId;		
+		this.departmentId=departmentId;
+		this.contractPriceId=contractPriceId;
+		this.productDocId=productDocId;
+		this.productLineDocId=productLineDocId;
+		this.userId=userId;	
+		this.credits=credits;
+		this.productType = productType;
+		this.cost = cost;
+		this.invoiceId = invoiceId;
+		this.cost2 = cost2;
+		this.cost3 = cost3;
+		this.cost4 = cost4;
+		this.cost5 = cost5;		
 	}
 	public Bill(
 			Integer billId,			
@@ -154,11 +210,23 @@ public class Bill implements Serializable {
 			String invoiced,
 			String billType,
 			String account,
-			Integer invoice,
+			String invoice,
 			String country,
 			String businessId,
 			String companyId,
-			String departmentId			
+			String departmentId,
+			Integer contractPriceId,
+			Integer productDocId,
+			Integer productLineDocId,
+			String userId,
+			BigDecimal credits,
+			String productType,
+			BigDecimal cost,
+			Integer invoiceId,
+			BigDecimal cost2,
+			BigDecimal cost3,
+			BigDecimal cost4,
+			BigDecimal cost5			
 			) {
 		this.billId=billId;		
 		this.client=client;
@@ -180,7 +248,19 @@ public class Bill implements Serializable {
 		this.country=country;
 		this.businessId=businessId;
 		this.companyId=companyId;
-		this.departmentId=departmentId;			
+		this.departmentId=departmentId;	
+		this.contractPriceId=contractPriceId;	
+		this.productDocId=productDocId;
+		this.productLineDocId=productLineDocId;	
+		this.userId=userId;	
+		this.credits=credits;
+		this.productType = productType;	
+		this.cost = cost;
+		this.invoiceId = invoiceId;	
+		this.cost2 = cost2;
+		this.cost3 = cost3;
+		this.cost4 = cost4;
+		this.cost5 = cost5;			
 	}
 	public Bill() {
 	}
@@ -283,10 +363,10 @@ public class Bill implements Serializable {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public Integer getInvoice() {
+	public String getInvoice() {
 		return invoice;
 	}
-	public void setInvoice(Integer invoice) {
+	public void setInvoice(String invoice) {
 		this.invoice = invoice;
 	}
 	public String getCountry() {
@@ -317,8 +397,98 @@ public class Bill implements Serializable {
 		this.departmentId = departmentId;
 	}
 	
+
 	
 	
+	
+	public Integer getContractPriceId() {
+		return contractPriceId;
+	}
+	public void setContractPriceId(Integer contractPriceId) {
+		this.contractPriceId = contractPriceId;
+	}
+	
+
+	
+	public Integer getProductDocId() {
+		return productDocId;
+	}
+	public void setProductDocId(Integer productDocId) {
+		this.productDocId = productDocId;
+	}
+	public Integer getProductLineDocId() {
+		return productLineDocId;
+	}
+	public void setProductLineDocId(Integer productLineDocId) {
+		this.productLineDocId = productLineDocId;
+	}
+	
+
+	
+	
+	
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public BigDecimal getCredits() {
+		return credits;
+	}
+	public void setCredits(BigDecimal credits) {
+		this.credits = credits;
+	}
+	
+	
+	
+	public String getProductType() {
+		return productType;
+	}
+	public void setProductType(String productType) {
+		this.productType = productType;
+	}
+	
+	
+	
+	
+	public BigDecimal getCost() {
+		return cost;
+	}
+	public void setCost(BigDecimal cost) {
+		this.cost = cost;
+	}
+	public Integer getInvoiceId() {
+		return invoiceId;
+	}
+	public void setInvoiceId(Integer invoiceId) {
+		this.invoiceId = invoiceId;
+	}
+	public BigDecimal getCost2() {
+		return cost2;
+	}
+	public void setCost2(BigDecimal cost2) {
+		this.cost2 = cost2;
+	}
+	public BigDecimal getCost3() {
+		return cost3;
+	}
+	public void setCost3(BigDecimal cost3) {
+		this.cost3 = cost3;
+	}
+	public BigDecimal getCost4() {
+		return cost4;
+	}
+	public void setCost4(BigDecimal cost4) {
+		this.cost4 = cost4;
+	}
+	public BigDecimal getCost5() {
+		return cost5;
+	}
+	public void setCost5(BigDecimal cost5) {
+		this.cost5 = cost5;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -331,23 +501,33 @@ public class Bill implements Serializable {
 		result = prime * result + ((businessId == null) ? 0 : businessId.hashCode());
 		result = prime * result + ((client == null) ? 0 : client.hashCode());
 		result = prime * result + ((companyId == null) ? 0 : companyId.hashCode());
+		result = prime * result + ((contractPriceId == null) ? 0 : contractPriceId.hashCode());
+		result = prime * result + ((cost == null) ? 0 : cost.hashCode());
+		result = prime * result + ((cost2 == null) ? 0 : cost2.hashCode());
+		result = prime * result + ((cost3 == null) ? 0 : cost3.hashCode());
+		result = prime * result + ((cost4 == null) ? 0 : cost4.hashCode());
+		result = prime * result + ((cost5 == null) ? 0 : cost5.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((credits == null) ? 0 : credits.hashCode());
 		result = prime * result + ((departmentId == null) ? 0 : departmentId.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((invoice == null) ? 0 : invoice.hashCode());
+		result = prime * result + ((invoiceId == null) ? 0 : invoiceId.hashCode());
 		result = prime * result + ((invoiced == null) ? 0 : invoiced.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + ((priceIncVat == null) ? 0 : priceIncVat.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + ((productDetail == null) ? 0 : productDetail.hashCode());
+		result = prime * result + ((productDocId == null) ? 0 : productDocId.hashCode());
+		result = prime * result + ((productLineDocId == null) ? 0 : productLineDocId.hashCode());
+		result = prime * result + ((productType == null) ? 0 : productType.hashCode());
 		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
 		result = prime * result + ((subjectId == null) ? 0 : subjectId.hashCode());
 		result = prime * result + ((subjectName == null) ? 0 : subjectName.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((vat == null) ? 0 : vat.hashCode());
 		return result;
 	}
-	
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -397,10 +577,45 @@ public class Bill implements Serializable {
 				return false;
 		} else if (!companyId.equals(other.companyId))
 			return false;
+		if (contractPriceId == null) {
+			if (other.contractPriceId != null)
+				return false;
+		} else if (!contractPriceId.equals(other.contractPriceId))
+			return false;
+		if (cost == null) {
+			if (other.cost != null)
+				return false;
+		} else if (!cost.equals(other.cost))
+			return false;
+		if (cost2 == null) {
+			if (other.cost2 != null)
+				return false;
+		} else if (!cost2.equals(other.cost2))
+			return false;
+		if (cost3 == null) {
+			if (other.cost3 != null)
+				return false;
+		} else if (!cost3.equals(other.cost3))
+			return false;
+		if (cost4 == null) {
+			if (other.cost4 != null)
+				return false;
+		} else if (!cost4.equals(other.cost4))
+			return false;
+		if (cost5 == null) {
+			if (other.cost5 != null)
+				return false;
+		} else if (!cost5.equals(other.cost5))
+			return false;
 		if (country == null) {
 			if (other.country != null)
 				return false;
 		} else if (!country.equals(other.country))
+			return false;
+		if (credits == null) {
+			if (other.credits != null)
+				return false;
+		} else if (!credits.equals(other.credits))
 			return false;
 		if (departmentId == null) {
 			if (other.departmentId != null)
@@ -416,6 +631,11 @@ public class Bill implements Serializable {
 			if (other.invoice != null)
 				return false;
 		} else if (!invoice.equals(other.invoice))
+			return false;
+		if (invoiceId == null) {
+			if (other.invoiceId != null)
+				return false;
+		} else if (!invoiceId.equals(other.invoiceId))
 			return false;
 		if (invoiced == null) {
 			if (other.invoiced != null)
@@ -442,6 +662,21 @@ public class Bill implements Serializable {
 				return false;
 		} else if (!productDetail.equals(other.productDetail))
 			return false;
+		if (productDocId == null) {
+			if (other.productDocId != null)
+				return false;
+		} else if (!productDocId.equals(other.productDocId))
+			return false;
+		if (productLineDocId == null) {
+			if (other.productLineDocId != null)
+				return false;
+		} else if (!productLineDocId.equals(other.productLineDocId))
+			return false;
+		if (productType == null) {
+			if (other.productType != null)
+				return false;
+		} else if (!productType.equals(other.productType))
+			return false;
 		if (reference == null) {
 			if (other.reference != null)
 				return false;
@@ -457,6 +692,11 @@ public class Bill implements Serializable {
 				return false;
 		} else if (!subjectName.equals(other.subjectName))
 			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
 		if (vat == null) {
 			if (other.vat != null)
 				return false;
@@ -464,9 +704,6 @@ public class Bill implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 	@Override
 	public String toString() {
 		return "Bill [billId=" + billId + ", client=" + client + ", billDate=" + billDate + ", subjectId=" + subjectId
@@ -474,12 +711,18 @@ public class Bill implements Serializable {
 				+ ", subjectName=" + subjectName + ", reference=" + reference + ", description=" + description
 				+ ", price=" + price + ", vat=" + vat + ", priceIncVat=" + priceIncVat + ", invoiced=" + invoiced
 				+ ", billType=" + billType + ", account=" + account + ", invoice=" + invoice + ", country=" + country
-				+ ", businessId=" + businessId + ", companyId=" + companyId + ", departmentId=" + departmentId + "]";
+				+ ", businessId=" + businessId + ", companyId=" + companyId + ", departmentId=" + departmentId
+				+ ", contractPriceId=" + contractPriceId + ", productDocId=" + productDocId + ", productLineDocId="
+				+ productLineDocId + ", userId=" + userId + ", credits=" + credits + ", productType=" + productType
+				+ ", cost=" + cost + ", invoiceId=" + invoiceId + ", cost2=" + cost2 + ", cost3=" + cost3 + ", cost4="
+				+ cost4 + ", cost5=" + cost5 + "]";
 	}
 	
 	
+
+	
 	
 
 
-
+	
 }

@@ -116,7 +116,8 @@ public class ProductController {
     //	"level_7": 12,
     //	"vatlevel_7": 14.4,
     //	"level_8": 12,
-    //	"vatlevel_8": 14.4
+    //	"vatlevel_8": 14.4,
+	//    "credits": 0	
     //}
 	public ProductDto createProduct(@RequestBody @Validated ProductDto dto)  throws ApplicationException {
 

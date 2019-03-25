@@ -57,7 +57,7 @@ public class ProductService {
 	 */
 	public ProductDto createProduct(ProductDto dto)  throws ApplicationException {
 
-		Product productExists= productRepository.findOne(dto.getProduct());
+		Product productExists= productRepository.findById(dto.getProduct()).get();
 		if (productExists!=null) {
 			ExceptionResponse exceptionResponse = new ExceptionResponse(
 					Constants.ERROR_MESSAGE_CODE_003, 
@@ -87,7 +87,8 @@ public class ProductService {
 				dto.getLevel7(),
 				dto.getVatLevel7(),
 				dto.getLevel8(),
-				dto.getVatLevel8()
+				dto.getVatLevel8(),
+				dto.getCredits()
 				);
 
 		validate(newProduct);
@@ -215,7 +216,8 @@ public class ProductService {
 				product.getLevel7(),
 				product.getVatLevel7(),
 				product.getLevel8(),
-				product.getVatLevel8()
+				product.getVatLevel8(),
+				product.getCredits()
 				);
 
 		return dto;
@@ -227,7 +229,7 @@ public class ProductService {
 	 * Verify and return the Product given an id.
 	 */
 	private Product verifyProduct(String id) throws ApplicationException {
-		Product product= productRepository.findOne(id);
+		Product product= productRepository.findById(id).get();
 		if (product==null) {
 			ExceptionResponse exceptionResponse = new ExceptionResponse(
 					Constants.ERROR_MESSAGE_CODE_001, 

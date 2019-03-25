@@ -1,15 +1,9 @@
 package com.armadillo.api.billingservice.dto;
 
 
-
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
-
-
-
-
 
 
 /**
@@ -79,7 +73,8 @@ public class ProductDto {
 	@JsonProperty("vatlevel_8")
 	private BigDecimal vatLevel8;
 	
-	
+	@JsonProperty("credits")
+	private BigDecimal credits;	
 
 	
 
@@ -105,7 +100,8 @@ public class ProductDto {
 			BigDecimal level7,
 			BigDecimal vatLevel7,
 			BigDecimal level8,
-			BigDecimal vatLevel8
+			BigDecimal vatLevel8,
+			BigDecimal credits
 			) {
 		this.description=description;
 		this.defaultPrice=defaultPrice;
@@ -126,6 +122,7 @@ public class ProductDto {
 		this.vatLevel7=vatLevel7;	
 		this.level8=level8;
 		this.vatLevel8=vatLevel8;	
+		this.credits = credits;				
 	}
 	public ProductDto(
 			String product,			
@@ -147,7 +144,8 @@ public class ProductDto {
 			BigDecimal level7,
 			BigDecimal vatLevel7,
 			BigDecimal level8,
-			BigDecimal vatLevel8
+			BigDecimal vatLevel8,
+			BigDecimal credits
 			) {	
 		this.product=product;		
 		this.description=description;
@@ -168,7 +166,8 @@ public class ProductDto {
 		this.level7=level7;
 		this.vatLevel7=vatLevel7;	
 		this.level8=level8;
-		this.vatLevel8=vatLevel8;			
+		this.vatLevel8=vatLevel8;	
+		this.credits = credits;			
 	}
 	protected ProductDto() {
 	}
@@ -294,6 +293,13 @@ public class ProductDto {
 	public void setVatLevel8(BigDecimal vatLevel8) {
 		this.vatLevel8 = vatLevel8;
 	}
+	public BigDecimal getCredits() {
+		return credits;
+	}
+	public void setCredits(BigDecimal credits) {
+		this.credits = credits;
+	}
+	
 	
 	
 	@Override
@@ -303,7 +309,7 @@ public class ProductDto {
 				+ level2 + ", vatLevel2=" + vatLevel2 + ", level3=" + level3 + ", vatLevel3=" + vatLevel3 + ", level4="
 				+ level4 + ", vatLevel4=" + vatLevel4 + ", level5=" + level5 + ", vatLevel5=" + vatLevel5 + ", level6="
 				+ level6 + ", vatLevel6=" + vatLevel6 + ", level7=" + level7 + ", vatLevel7=" + vatLevel7 + ", level8="
-				+ level8 + ", vatLevel8=" + vatLevel8 + "]";
+				+ level8 + ", vatLevel8=" + vatLevel8 + ", credits=" + credits + "]";
 	}
 	
 	

@@ -26,7 +26,13 @@ public class Constants {
 	public static final String ERROR_MESSAGE_TYPE_003 = "ERROR";	
 	
 	
-
+	//INFORMATION MESSAGES
+	public static final String INFORMATION_001 = 
+			"\"message_code\":\"001\","
+			+ "\"message_text\":\"Sucessfully Processed\","
+			+ "\"message_type\":\"INFORMATION\""			
+			;
+	
 
 	//TokenAuthenticationService Constants
 	public static final long EXPIRATION_TIME = 86_400_000; // 1 days
