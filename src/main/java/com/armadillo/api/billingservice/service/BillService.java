@@ -169,7 +169,8 @@ public class BillService {
 				dto.getCost2(),
 				dto.getCost3(),
 				dto.getCost4(),
-				dto.getCost5()
+				dto.getCost5(),
+				dto.getClientName()
 				);
 
 		validate(newBill);
@@ -268,7 +269,10 @@ public class BillService {
 		if (dto.getCredits()!=null) {		
 			bill.setCredits(dto.getCredits());
 		}			
-
+		if (dto.getClientName()!=null) {		
+			bill.setClientName(dto.getClientName());
+		}
+		
 		validate(bill);
 
 		return toDto(billRepository.save(bill));
@@ -380,12 +384,12 @@ public class BillService {
 					} catch (Exception e) {}
 					dto.setCompanyName(companyName);
 
-					String clientName = "";
+/*					String clientName = "";
 					try {
 						ClientDto clientDto = clientService.getClientById((Integer)b[1]);
 						clientName = clientDto.getForename()+" "+clientDto.getSurname();
 					} catch (Exception e) {}
-					dto.setClientName(clientName);					
+					dto.setClientName(clientName);	*/				
 					return dto;
 				}
 			).collect(Collectors.toList());  
@@ -415,12 +419,12 @@ public class BillService {
 					} catch (Exception e) {}
 					dto.setCompanyName(companyName);
 
-					String clientName = "";
+/*					String clientName = "";
 					try {
 						ClientDto clientDto = clientService.getClientById((Integer)b[1]);
 						clientName = clientDto.getForename()+" "+clientDto.getSurname();
 					} catch (Exception e) {}
-					dto.setClientName(clientName);					
+					dto.setClientName(clientName);	*/				
 					return dto;
 				}
 			).collect(Collectors.toList());  
@@ -449,12 +453,12 @@ public class BillService {
 					} catch (Exception e) {}
 					dto.setCompanyName(companyName);
 
-					String clientName = "";
+/*					String clientName = "";
 					try {
 						ClientDto clientDto = clientService.getClientById((Integer)b[1]);
 						clientName = clientDto.getForename()+" "+clientDto.getSurname();
 					} catch (Exception e) {}
-					dto.setClientName(clientName);					
+					dto.setClientName(clientName);*/					
 					return dto;
 				}
 			).collect(Collectors.toList());  
@@ -825,7 +829,8 @@ public class BillService {
 				(BigDecimal)b[29],	
 				(BigDecimal)b[30],	
 				(BigDecimal)b[31],	
-				(BigDecimal)b[32]
+				(BigDecimal)b[32],
+				(String)b[33]
 				);
 
 		return dto;
@@ -872,7 +877,8 @@ public class BillService {
 				bill.getCost2(),
 				bill.getCost3(),
 				bill.getCost4(),
-				bill.getCost5()
+				bill.getCost5(),
+				bill.getClientName()
 				);
 
 		return dto;

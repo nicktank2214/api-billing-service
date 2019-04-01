@@ -188,7 +188,8 @@ public class BillDto {
 			BigDecimal cost2,
 			BigDecimal cost3,
 			BigDecimal cost4,
-			BigDecimal cost5
+			BigDecimal cost5,
+			String clientName
 			) {
 		this.client=client;
 		this.billDate=billDate;
@@ -222,6 +223,7 @@ public class BillDto {
 		this.cost3 = cost3;
 		this.cost4 = cost4;
 		this.cost5 = cost5;		
+		this.clientName = clientName;
 	}
 	public BillDto(
 			Integer billId,			
@@ -256,7 +258,8 @@ public class BillDto {
 			BigDecimal cost2,
 			BigDecimal cost3,
 			BigDecimal cost4,
-			BigDecimal cost5					
+			BigDecimal cost5,
+			String clientName
 			) {	
 		this.billId=billId;		
 		this.client=client;
@@ -290,7 +293,8 @@ public class BillDto {
 		this.cost2 = cost2;
 		this.cost3 = cost3;
 		this.cost4 = cost4;
-		this.cost5 = cost5;			
+		this.cost5 = cost5;	
+		this.clientName = clientName;		
 	}
 	public BillDto() {
 	}

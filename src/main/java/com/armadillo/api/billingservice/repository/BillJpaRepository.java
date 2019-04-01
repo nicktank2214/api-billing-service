@@ -78,7 +78,8 @@ public interface BillJpaRepository extends JpaRepository<Bill,Integer> {
 			"bill.cost2,"+
 			"bill.cost3,"+
 			"bill.cost4,"+
-			"bill.cost5 "+	
+			"bill.cost5, "+
+			"bill.clientname "+			
     		"FROM bill bill WHERE "+
     		"bill.client = (:client) AND "+
     		"bill.billdate BETWEEN (:fromDate) AND (:toDate) "
@@ -126,7 +127,8 @@ public interface BillJpaRepository extends JpaRepository<Bill,Integer> {
 			"bill.cost2,"+
 			"bill.cost3,"+
 			"bill.cost4,"+
-			"bill.cost5 "+	
+			"bill.cost5, "+
+			"bill.clientname "+
     		"FROM bill bill WHERE "+
     		"UPPER(bill.account) = UPPER(:account) AND "+
     		"bill.billdate BETWEEN (:fromDate) AND (:toDate) "
@@ -174,7 +176,8 @@ public interface BillJpaRepository extends JpaRepository<Bill,Integer> {
 			"bill.cost2,"+
 			"bill.cost3,"+
 			"bill.cost4,"+
-			"bill.cost5 "+	
+			"bill.cost5, "+
+			"bill.clientname "+			
     		"FROM bill bill WHERE "+
     		"bill.billdate BETWEEN (:fromDate) AND (:toDate) "
     		+ "ORDER BY bill.billdate", 

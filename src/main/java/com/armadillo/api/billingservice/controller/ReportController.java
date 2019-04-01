@@ -5,6 +5,7 @@ package com.armadillo.api.billingservice.controller;
 
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -61,12 +62,6 @@ public class ReportController {
 
 
 
-
-
-
-
-
-
 	/**
 	 * list billings records using different operators
 	 */   
@@ -76,20 +71,9 @@ public class ReportController {
 			@RequestBody @Validated ReportDto reportDto		
 			)  throws ApplicationException {		
 
-
 		//convert dates 
-		Calendar calFromDate = Calendar. getInstance();
-		calFromDate.setTime(reportDto.getFromDateVal());		
-		calFromDate.set(Calendar.HOUR, 0);
-		calFromDate.set(Calendar.MINUTE, 0);
-		calFromDate.set(Calendar.SECOND, 0);
-		reportDto.setFromDateVal(calFromDate.getTime());
-		Calendar caltoDate = Calendar. getInstance();
-		caltoDate.setTime(reportDto.getToDateVal());		
-		caltoDate.set(Calendar.HOUR, 23);
-		caltoDate.set(Calendar.MINUTE, 59);
-		caltoDate.set(Calendar.SECOND, 59);
-		reportDto.setToDateVal(caltoDate.getTime());
+		reportDto.setFromDateVal(this.setFromDate(reportDto.getFromDateVal()));
+		reportDto.setToDateVal(this.setToDate(reportDto.getToDateVal()));
 
 		log.info("["+this.getClass().getName()+"] "+new java.util.Date()+
 				" billExtract1 - "+ reportDto.toString()+		
@@ -153,18 +137,8 @@ public class ReportController {
 			)  throws ApplicationException {		
 
 		//convert dates 
-		Calendar calFromDate = Calendar. getInstance();
-		calFromDate.setTime(reportDto.getFromDateVal());		
-		calFromDate.set(Calendar.HOUR, 0);
-		calFromDate.set(Calendar.MINUTE, 0);
-		calFromDate.set(Calendar.SECOND, 0);
-		reportDto.setFromDateVal(calFromDate.getTime());
-		Calendar caltoDate = Calendar. getInstance();
-		caltoDate.setTime(reportDto.getToDateVal());		
-		caltoDate.set(Calendar.HOUR, 23);
-		caltoDate.set(Calendar.MINUTE, 59);
-		caltoDate.set(Calendar.SECOND, 59);
-		reportDto.setToDateVal(caltoDate.getTime());
+		reportDto.setFromDateVal(this.setFromDate(reportDto.getFromDateVal()));
+		reportDto.setToDateVal(this.setToDate(reportDto.getToDateVal()));
 
 		log.info("["+this.getClass().getName()+"] "+new java.util.Date()+
 				" profitAnalysis1 - "+ reportDto.toString()+		
@@ -204,18 +178,8 @@ public class ReportController {
 			)  throws ApplicationException {		
 
 		//convert dates 
-		Calendar calFromDate = Calendar. getInstance();
-		calFromDate.setTime(reportDto.getFromDateVal());		
-		calFromDate.set(Calendar.HOUR, 0);
-		calFromDate.set(Calendar.MINUTE, 0);
-		calFromDate.set(Calendar.SECOND, 0);
-		reportDto.setFromDateVal(calFromDate.getTime());
-		Calendar caltoDate = Calendar. getInstance();
-		caltoDate.setTime(reportDto.getToDateVal());		
-		caltoDate.set(Calendar.HOUR, 23);
-		caltoDate.set(Calendar.MINUTE, 59);
-		caltoDate.set(Calendar.SECOND, 59);
-		reportDto.setToDateVal(caltoDate.getTime());
+		reportDto.setFromDateVal(this.setFromDate(reportDto.getFromDateVal()));
+		reportDto.setToDateVal(this.setToDate(reportDto.getToDateVal()));
 
 		log.info("["+this.getClass().getName()+"] "+new java.util.Date()+
 				" userBill1 - "+ reportDto.toString()+		
@@ -234,8 +198,26 @@ public class ReportController {
 	} 
 
 
+	public Date setFromDate(Date date) {
+		Calendar calDate = Calendar. getInstance();
+		calDate.setTime(date);		
+		calDate.set(Calendar.HOUR, 0);
+		calDate.set(Calendar.MINUTE, 0);
+		calDate.set(Calendar.SECOND, 0);
+		return calDate.getTime(); 
+	}
 
+	
+	public Date setToDate(Date date) {
+		Calendar calDate = Calendar. getInstance();
+		calDate.setTime(date);		
+		calDate.set(Calendar.HOUR, 23);
+		calDate.set(Calendar.MINUTE, 59);
+		calDate.set(Calendar.SECOND, 59);
+		return calDate.getTime(); 
+	}
 
+	
 	/**
 	 * Exception handler if NoSuchElementException is thrown in this Controller
 	 */

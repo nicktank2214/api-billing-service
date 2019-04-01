@@ -122,6 +122,26 @@ public class ProductDocController {
 		List<ProductDocDto> dtoList = productDocService.findProductDocsByAccountCountry(account, country);
 		return dtoList;
 	}
+
+	
+	/**
+	 */
+	@RequestMapping(method = RequestMethod.GET, path = "/findbyaccountandcountryandlanguage")
+	//<GET>http://localhost:8080/productdoc/findbyaccountandcountry?account=A055&country=CH&language=EN
+	public List<ProductDocDto> findProductDocsByAccountCountryLanguage(
+    		@RequestParam(value = "account") String account,
+    		@RequestParam(value = "country") String country,
+    		@RequestParam(value = "language") String language    		
+    		 ) throws ApplicationException {
+
+		log.info("["+this.getClass().getName()+"] "+new java.util.Date()+
+				" findProductDocsByAccountCountry - Parameters [account=" + account+	", country=" + country+
+				"]");
+
+		List<ProductDocDto> dtoList = productDocService.findProductDocsByAccountCountryLanguage(account, country, language);
+		return dtoList;
+	}
+	
 	
 	
     @RequestMapping(method = RequestMethod.GET, path = "/findbyaccountandcountryandproduct")

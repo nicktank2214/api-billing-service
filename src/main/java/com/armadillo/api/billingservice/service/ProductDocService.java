@@ -15,7 +15,7 @@ import com.armadillo.api.billingservice.Constants;
 import com.armadillo.api.billingservice.domain.ProductDoc;
 import com.armadillo.api.billingservice.dto.ProductDocDto;
 import com.armadillo.api.billingservice.repository.ProductDocRepository;
-
+import com.armadillo.api.billingservice.repository.ProductTypeDocRepository;
 import com.armadillo.api.exception.ApplicationException;
 import com.armadillo.api.exception.ExceptionResponse;
 
@@ -41,13 +41,15 @@ public class ProductDocService {
 
 	//inject repositories
 	private ProductDocRepository productDocRepository;
-
+	private ProductTypeDocRepository productTypeDocRepository;
+	
 
 
 	//constructor
 	@Autowired 
-	public ProductDocService(ProductDocRepository productDocRepository) {
+	public ProductDocService(ProductDocRepository productDocRepository, ProductTypeDocRepository productTypeDocRepository) {
 		this.productDocRepository = productDocRepository;	
+		this.productTypeDocRepository = productTypeDocRepository;
 	}
 
 
@@ -212,6 +214,34 @@ public class ProductDocService {
 				.collect(Collectors.toList()
 				);    
 
+		return dtoList;
+	}
+	
+	
+	/**
+	 */
+	public List<ProductDocDto> findProductDocsByAccountCountryLanguage(
+    		String account,
+    		String country,
+    		String language
+    		)  throws ApplicationException {
+
+		List<ProductDoc> resultsList = null;
+		resultsList = productDocRepository.findByAccountAndCountryOrderByProductTypeAsc(account, country);
+
+		List<ProductDocDto> dtoList = resultsList.stream()
+				.map((ProductDoc b) -> {
+					ProductDocDto dto = toDto(b);
+					String description = "";
+					try {
+						description = productTypeDocRepository.findByLanguageAndProductType(language, dto.getProductType()).getDescription();
+					} catch (Exception e) {}
+					dto.setProductDescription(description);
+		
+					return dto;
+				}
+			).collect(Collectors.toList());  
+		
 		return dtoList;
 	}
 	

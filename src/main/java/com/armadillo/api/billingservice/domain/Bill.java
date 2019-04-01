@@ -124,6 +124,9 @@ public class Bill implements Serializable {
 	@Column(name = "cost5")
 	private BigDecimal cost5;
 	
+	@Column(name = "clientname")
+	private String clientName;
+	
 	
 
 	public Bill(
@@ -158,7 +161,8 @@ public class Bill implements Serializable {
 			BigDecimal cost2,
 			BigDecimal cost3,
 			BigDecimal cost4,
-			BigDecimal cost5
+			BigDecimal cost5,
+			String clientName
 			) {
 		this.client=client;
 		this.billDate=billDate;
@@ -192,6 +196,7 @@ public class Bill implements Serializable {
 		this.cost3 = cost3;
 		this.cost4 = cost4;
 		this.cost5 = cost5;		
+		this.clientName = clientName;
 	}
 	public Bill(
 			Integer billId,			
@@ -226,7 +231,8 @@ public class Bill implements Serializable {
 			BigDecimal cost2,
 			BigDecimal cost3,
 			BigDecimal cost4,
-			BigDecimal cost5			
+			BigDecimal cost5,
+			String clientName
 			) {
 		this.billId=billId;		
 		this.client=client;
@@ -260,7 +266,8 @@ public class Bill implements Serializable {
 		this.cost2 = cost2;
 		this.cost3 = cost3;
 		this.cost4 = cost4;
-		this.cost5 = cost5;			
+		this.cost5 = cost5;
+		this.clientName = clientName;		
 	}
 	public Bill() {
 	}
@@ -489,6 +496,14 @@ public class Bill implements Serializable {
 	public void setCost5(BigDecimal cost5) {
 		this.cost5 = cost5;
 	}
+	
+	
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -500,6 +515,7 @@ public class Bill implements Serializable {
 		result = prime * result + ((billType == null) ? 0 : billType.hashCode());
 		result = prime * result + ((businessId == null) ? 0 : businessId.hashCode());
 		result = prime * result + ((client == null) ? 0 : client.hashCode());
+		result = prime * result + ((clientName == null) ? 0 : clientName.hashCode());
 		result = prime * result + ((companyId == null) ? 0 : companyId.hashCode());
 		result = prime * result + ((contractPriceId == null) ? 0 : contractPriceId.hashCode());
 		result = prime * result + ((cost == null) ? 0 : cost.hashCode());
@@ -571,6 +587,11 @@ public class Bill implements Serializable {
 			if (other.client != null)
 				return false;
 		} else if (!client.equals(other.client))
+			return false;
+		if (clientName == null) {
+			if (other.clientName != null)
+				return false;
+		} else if (!clientName.equals(other.clientName))
 			return false;
 		if (companyId == null) {
 			if (other.companyId != null)
@@ -715,11 +736,10 @@ public class Bill implements Serializable {
 				+ ", contractPriceId=" + contractPriceId + ", productDocId=" + productDocId + ", productLineDocId="
 				+ productLineDocId + ", userId=" + userId + ", credits=" + credits + ", productType=" + productType
 				+ ", cost=" + cost + ", invoiceId=" + invoiceId + ", cost2=" + cost2 + ", cost3=" + cost3 + ", cost4="
-				+ cost4 + ", cost5=" + cost5 + "]";
+				+ cost4 + ", cost5=" + cost5 + ", clientName=" + clientName + "]";
 	}
 	
 	
-
 	
 	
 

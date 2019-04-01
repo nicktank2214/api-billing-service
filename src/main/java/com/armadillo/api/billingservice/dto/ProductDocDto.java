@@ -46,6 +46,11 @@ public class ProductDocDto {
 	private BigDecimal cost5;
 
 
+	@JsonProperty("product_description")
+	private String productDescription;
+	
+	
+	
 	public ProductDocDto(
 			String productType,
 			String account,
@@ -170,6 +175,12 @@ public class ProductDocDto {
 	public void setCost5(BigDecimal cost5) {
 		this.cost5 = cost5;
 	}
+	public String getProductDescription() {
+		return productDescription;
+	}
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
+	}
 	
 	
 	
@@ -177,10 +188,13 @@ public class ProductDocDto {
 	public String toString() {
 		return "ProductDocDto [productDocId=" + productDocId + ", productType=" + productType + ", account=" + account
 				+ ", country=" + country + ", price=" + price + ", cost=" + cost + ", credits=" + credits + ", cost2="
-				+ cost2 + ", cost3=" + cost3 + ", cost4=" + cost4 + ", cost5=" + cost5 + "]";
+				+ cost2 + ", cost3=" + cost3 + ", cost4=" + cost4 + ", cost5=" + cost5 + ", productDescription="
+				+ productDescription + "]";
 	}
-
 	
+	
+
+
 	
 
 }
