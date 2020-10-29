@@ -57,7 +57,7 @@ public class ProductTypeService {
 	 */
 	public ProductTypeDto createProductType(ProductTypeDto dto)  throws ApplicationException {
 
-		ProductType productTypeExists= productTypeRepository.findOne(dto.getType());
+		ProductType productTypeExists= productTypeRepository.findById(dto.getType()).get();
 		if (productTypeExists!=null) {
 			ExceptionResponse exceptionResponse = new ExceptionResponse(
 					Constants.ERROR_MESSAGE_CODE_003, 
@@ -137,7 +137,7 @@ public class ProductTypeService {
 	 * Verify and return the ProductType given an id.
 	 */
 	private ProductType verifyProductType(String id) throws ApplicationException {
-		ProductType productType= productTypeRepository.findOne(id);
+		ProductType productType= productTypeRepository.findById(id).get();
 		if (productType==null) {
 			ExceptionResponse exceptionResponse = new ExceptionResponse(
 					Constants.ERROR_MESSAGE_CODE_001, 

@@ -88,7 +88,13 @@ public class Product implements Serializable {
 	@Column(name = "vatlevel_8")
 	private BigDecimal vatLevel8;
 
-
+	@Column(name = "country")
+	private String country;
+	
+	@Column(name = "credits")
+	private BigDecimal credits;	
+	
+	
 
 	public Product(
 			String description,
@@ -109,7 +115,8 @@ public class Product implements Serializable {
 			BigDecimal level7,
 			BigDecimal vatLevel7,
 			BigDecimal level8,
-			BigDecimal vatLevel8
+			BigDecimal vatLevel8,
+			BigDecimal credits
 			) {
 		this.description=description;
 		this.defaultPrice=defaultPrice;
@@ -129,7 +136,8 @@ public class Product implements Serializable {
 		this.level7=level7;
 		this.vatLevel7=vatLevel7;	
 		this.level8=level8;
-		this.vatLevel8=vatLevel8;	
+		this.vatLevel8=vatLevel8;
+		this.credits = credits;			
 	}
 	public Product(
 			String product,			
@@ -151,7 +159,8 @@ public class Product implements Serializable {
 			BigDecimal level7,
 			BigDecimal vatLevel7,
 			BigDecimal level8,
-			BigDecimal vatLevel8
+			BigDecimal vatLevel8,
+			BigDecimal credits	
 			) {
 		this.product=product;		
 		this.description=description;
@@ -172,7 +181,8 @@ public class Product implements Serializable {
 		this.level7=level7;
 		this.vatLevel7=vatLevel7;	
 		this.level8=level8;
-		this.vatLevel8=vatLevel8;	
+		this.vatLevel8=vatLevel8;
+		this.credits = credits;		
 	}
 	public Product() {
 	}
@@ -299,6 +309,12 @@ public class Product implements Serializable {
 	public void setVatLevel8(BigDecimal vatLevel8) {
 		this.vatLevel8 = vatLevel8;
 	}
+	public BigDecimal getCredits() {
+		return credits;
+	}
+	public void setCredits(BigDecimal credits) {
+		this.credits = credits;
+	}
 	
 	
 	
@@ -306,6 +322,8 @@ public class Product implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((credits == null) ? 0 : credits.hashCode());
 		result = prime * result + ((defaultPrice == null) ? 0 : defaultPrice.hashCode());
 		result = prime * result + ((defaultVat == null) ? 0 : defaultVat.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -330,6 +348,7 @@ public class Product implements Serializable {
 	}
 	
 	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -339,6 +358,16 @@ public class Product implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
+		if (country == null) {
+			if (other.country != null)
+				return false;
+		} else if (!country.equals(other.country))
+			return false;
+		if (credits == null) {
+			if (other.credits != null)
+				return false;
+		} else if (!credits.equals(other.credits))
+			return false;
 		if (defaultPrice == null) {
 			if (other.defaultPrice != null)
 				return false;
@@ -448,15 +477,13 @@ public class Product implements Serializable {
 	public String toString() {
 		return "Product [product=" + product + ", description=" + description + ", defaultPrice=" + defaultPrice
 				+ ", defaultVat=" + defaultVat + ", level1=" + level1 + ", vatLevel1=" + vatLevel1 + ", level2="
-				+ level2 + ", vatLevel2=" + vatLevel2 + ", level3=" + level3 + ", vatLevel3=" + vatLevel3
-				+ ", level4=" + level4 + ", vatLevel4=" + vatLevel4 + ", level5=" + level5 + ", vatLevel5="
-				+ vatLevel5 + ", level6=" + level6 + ", vatLevel6=" + vatLevel6 + ", level7=" + level7
-				+ ", vatLevel7=" + vatLevel7 + ", level8=" + level8 + ", vatLevel8=" + vatLevel8 + "]";
+				+ level2 + ", vatLevel2=" + vatLevel2 + ", level3=" + level3 + ", vatLevel3=" + vatLevel3 + ", level4="
+				+ level4 + ", vatLevel4=" + vatLevel4 + ", level5=" + level5 + ", vatLevel5=" + vatLevel5 + ", level6="
+				+ level6 + ", vatLevel6=" + vatLevel6 + ", level7=" + level7 + ", vatLevel7=" + vatLevel7 + ", level8="
+				+ level8 + ", vatLevel8=" + vatLevel8 + ", country=" + country + ", credits=" + credits + "]";
 	}
+		
 	
-	
-
-
 
 
 }

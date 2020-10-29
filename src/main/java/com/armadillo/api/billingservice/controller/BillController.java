@@ -2,6 +2,8 @@ package com.armadillo.api.billingservice.controller;
 
 
 
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -16,8 +18,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.armadillo.api.billingservice.dto.BillDto;
 import com.armadillo.api.billingservice.service.BillService;
-import com.armadillo.api.exception.ExceptionResponse;
 
+import com.armadillo.api.exception.ExceptionResponse;
+import com.armadillo.api.util.Util;
 import com.armadillo.api.exception.ApplicationException;
 
 
@@ -65,6 +68,30 @@ public class BillController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	//<GET>http://localhost:8080/bill/1
+	//{
+	//  "bill_id": 1,
+	//	"client": 167634,
+	//	"bill_date": 1514851200000,
+	//	"subject_id": "02AD01",
+	//	"product": "CST",
+	//	"product_detail": "",
+	//	"bill_time": "08:39:42",
+	//	"subject_name": "CNH Industrial N.V.  56532474",
+	//	"reference": "852173179 Mafaz Nazar",
+	//	"description": "Netherlands extract - 1 Document (1 item @ 15.00)",
+	//	"price": 15,
+	//	"vat": 3,
+	//	"price_inc_vat": 18,
+	//	"invoiced": "no",
+	//	"bill_type": "RES",
+	//	"account": "C482",
+	//	"invoice": 20796,
+	//	"country": "",
+	//	"business_id": "",
+	//	"company_id": "",
+	//	"department_id": "",
+	//	"contract_price_id": 0	
+	//}	
 	public BillDto findBillById(@PathVariable(value = "id") Integer id) throws ApplicationException {
 
 		log.info("["+this.getClass().getName()+"] "+new java.util.Date()+
@@ -85,7 +112,7 @@ public class BillController {
 
 		log.info("["+this.getClass().getName()+"] "+new java.util.Date()+
 				" findAllBills");
- 
+
 		List<BillDto> dtoList = billService.getAllBills();
 		return dtoList;
 	}   
@@ -96,8 +123,8 @@ public class BillController {
 	@RequestMapping(method = RequestMethod.GET, path = "/findbyaccount")
 	//<GET>http://localhost:8080/bill/findbyaccount?account=C449
 	public List<BillDto> findBillsByAccount(
-    		@RequestParam(value = "account") String account
-    		 ) throws ApplicationException {
+			@RequestParam(value = "account") String account
+			) throws ApplicationException {
 
 		log.info("["+this.getClass().getName()+"] "+new java.util.Date()+
 				" findBillsByAccount - Parameters [account=" + account+ "]");
@@ -105,25 +132,82 @@ public class BillController {
 		List<BillDto> dtoList = billService.findBillsByAccount(account);
 		return dtoList;
 	}
-	
-	
-    @RequestMapping(method = RequestMethod.GET, path = "/findbyaccountandproduct")
-    //<GET>http://localhost:8080/bill/findbyaccountandproduct?account=C449&product=H_15
-    public BillDto findBillByAccountProduct(
-    		@RequestParam(value = "account") String account, 
-    		@RequestParam(value = "product") String product
-    		) throws ApplicationException {
-    	
+
+
+	/**
+	 */
+	@RequestMapping(method = RequestMethod.GET, path = "/findbyclient")
+	//<GET>http://localhost:8080/bill/findbyclient?client=C449
+	public List<BillDto> findBillsByClient(
+			@RequestParam(value = "client") Integer client
+			) throws ApplicationException {
+
 		log.info("["+this.getClass().getName()+"] "+new java.util.Date()+
-				" findSystemCodesByCodeTypeCodeValue "+
-				"- Parameters [account=" + account+	", product=" + product+
+				" findBillsByClient - Parameters [client=" + client+ "]");
+
+		List<BillDto> dtoList = billService.findBillsByClient(client);
+		return dtoList;
+	}
+
+
+
+
+
+	/**
+	 * list billings records using different operators
+	 */   
+	@RequestMapping(method = RequestMethod.GET, path = "/search1")    
+	//<GET>http://localhost:8080/bill/search1
+	public List<BillDto> billSearch1(
+			@RequestParam(value = "search_opr") String searchOpr,
+			@RequestParam(value = "search_val") String searchVal,
+			@RequestParam(value = "from_date_val") String fromDateVal,
+			@RequestParam(value = "to_date_val") String toDateVal   	
+			)  throws ApplicationException {		
+
+
+		Date fromDate = Util.convertDateStringToDate(fromDateVal);
+		Date toDate = Util.convertDateStringToDate(toDateVal);
+
+		log.info("["+this.getClass().getName()+"] "+new java.util.Date()+
+				" billSearch1 - Parameters ["+
+				" searchOpr=" + searchOpr+ ", "+
+				" searchVal=" + searchVal+ ", "+
+				" fromDateVal=" + fromDateVal+ ", "+
+				" toDateVal=" + toDateVal+ ", "+
+				" fromDate=" + fromDate+ ", "+
+				" toDate=" + toDate+ " "+				
 				"]");
-    	
-		BillDto dto = billService.findBillByAccountProduct(account, product);
-		return dto;
-    }
-    
-	
+
+
+		List<BillDto> dtoList = null;
+		if (searchOpr.equals("Account")) {
+			dtoList = billService.findBillsByAccountWithLookupData(searchVal);			
+		}
+		if (searchOpr.equals("Client")) {
+			dtoList = billService.findBillsByClientWithLookupData(new Integer(searchVal));			
+		}		
+		if (searchOpr.equals("AccountAndBillDate")) {
+			dtoList = billService.findBillsByAccountAndBillDateWithLookupData(searchVal,fromDate,toDate);			
+		}
+		if (searchOpr.equals("ClientAndBillDate")) {
+			dtoList = billService.findBillsByClientAndBillDateWithLookupData(new Integer(searchVal),fromDate,toDate);			
+		}		
+		if (searchOpr.equals("ID")) {
+			BillDto billDto = billService.getBillById(new Integer(searchVal));
+			dtoList = new LinkedList<BillDto>();
+			dtoList.add(billDto);
+		}
+
+
+
+		return dtoList;
+	}   
+
+
+
+
+
 	/**
 	 * Create a bill
 	 */
@@ -131,20 +215,33 @@ public class BillController {
 	@ResponseStatus(HttpStatus.CREATED)
 	//<POST>http://localhost:8080/bill
 	//{
-	//    "contract_price_id": 1,
-	//    "account": "C449",
-	//    "product": "H_15",
-	//    "price": 27.5,
-	//    "vat": 33,
-	//    "discount_price": 0,
-	//    "discount_vat": 0,
-	//    "discount_multiple": 0
+	//	"client": 167634,
+	//	"bill_date": 1514851200000,
+	//	"subject_id": "02AD01",
+	//	"product": "CST",
+	//	"product_detail": "",
+	//	"bill_time": "08:39:42",
+	//	"subject_name": "CNH Industrial N.V.  56532474",
+	//	"reference": "852173179 Mafaz Nazar",
+	//	"description": "Netherlands extract - 1 Document (1 item @ 15.00)",
+	//	"price": 15,
+	//	"vat": 3,
+	//	"price_inc_vat": 18,
+	//	"invoiced": "no",
+	//	"bill_type": "RES",
+	//	"account": "C482",
+	//	"invoice": 20796,
+	//	"country": "",
+	//	"business_id": "",
+	//	"company_id": "",
+	//	"department_id": "",
+	//	"contract_price_id": 0
 	//}
 	public BillDto createBill(@RequestBody @Validated BillDto dto)  throws ApplicationException {
 
 		log.info("["+this.getClass().getName()+"] "+new java.util.Date()+
-				" createBill - " + dto.toString()+ "]");
-		
+				" createBill - " + dto.toString());
+
 		BillDto productDto = billService.createBill(dto);
 		return productDto;
 	}
@@ -160,8 +257,8 @@ public class BillController {
 			)  throws ApplicationException {
 
 		log.info("["+this.getClass().getName()+"] "+new java.util.Date()+
-				" updateBill - " + dto.toString()+ "]");
-		
+				" updateBill - " + dto.toString());
+
 		BillDto billDto = billService.updateBill(id, dto);
 		return billDto;
 	}
@@ -177,8 +274,8 @@ public class BillController {
 	public @ResponseBody ExceptionResponse handleBillServiceException(ApplicationException exception ) {
 		return exception.getExceptionResponse();
 	}
-	
-	
+
+
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 	public @ResponseBody ExceptionResponse handleException(Exception exception) {
@@ -188,9 +285,9 @@ public class BillController {
 				exception.getMessage(),  
 				"ERROR"
 				);		
-		
+
 		return exceptionResponse;
 	}
-	
-	
+
+
 }

@@ -76,7 +76,10 @@ public class ContractPriceService {
 				dto.getVat(),
 				dto.getDiscountPrice(),
 				dto.getDiscountVat(),
-				dto.getDiscountMultiple()
+				dto.getDiscountMultiple(),
+				dto.getBusinessId(),
+				dto.getCompanyId(),
+				dto.getDepartmentId()				
 				);
 
 		validate(newContractPrice);
@@ -108,6 +111,15 @@ public class ContractPriceService {
 		if (dto.getDiscountMultiple()!=null) {		
 			contractPrice.setDiscountMultiple(dto.getDiscountMultiple());
 		}
+		if (dto.getBusinessId()!=null) {		
+			contractPrice.setBusinessId(dto.getBusinessId());
+		}
+		if (dto.getCompanyId()!=null) {		
+			contractPrice.setCompanyId(dto.getCompanyId());
+		}
+		if (dto.getDepartmentId()!=null) {		
+			contractPrice.setDepartmentId(dto.getDepartmentId());
+		}				
 		
 		validate(contractPrice);
 
@@ -178,7 +190,10 @@ public class ContractPriceService {
 				contractPrice.getVat(),
 				contractPrice.getDiscountPrice(),
 				contractPrice.getDiscountVat(),
-				contractPrice.getDiscountMultiple()
+				contractPrice.getDiscountMultiple(),
+				contractPrice.getBusinessId(),
+				contractPrice.getCompanyId(),
+				contractPrice.getDepartmentId()					
 				);
 
 		return dto;
@@ -190,7 +205,7 @@ public class ContractPriceService {
 	 * Verify and return the ContractPrice given an id.
 	 */
 	private ContractPrice verifyContractPrice(Integer id) throws ApplicationException {
-		ContractPrice contractPrice= contractPriceRepository.findOne(id);
+		ContractPrice contractPrice= contractPriceRepository.findById(id).get();
 		if (contractPrice==null) {
 			ExceptionResponse exceptionResponse = new ExceptionResponse(
 					Constants.ERROR_MESSAGE_CODE_001, 
